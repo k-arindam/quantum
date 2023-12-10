@@ -2,31 +2,31 @@ import 'dart:io';
 
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart';
-import 'package:shelf_router/shelf_router.dart';
 
-// Configure routes.
-final _router = Router()
-  ..get('/', _rootHandler)
-  ..get('/echo/<message>', _echoHandler);
+import 'src/routes/server_routes.dart';
+import 'src/services/cors_service.dart';
 
-Response _rootHandler(Request req) {
-  return Response.ok('Hello, World!\n');
-}
+Future<void> main(List<String> args) async => Quantum.startApp();
 
-Response _echoHandler(Request request) {
-  final message = request.params['message'];
-  return Response.ok('$message\n');
-}
+abstract class Quantum {
+  static final _serverRoutes = ServerRoutes.shared;
+  static final _ip = InternetAddress.anyIPv4;
+  static final _port = int.parse(Platform.environment['PORT'] ?? '8080');
 
-void main(List<String> args) async {
-  // Use any available host or container IP (usually `0.0.0.0`).
-  final ip = InternetAddress.anyIPv4;
+  static Future<void> startApp() async {
+    final handler = Pipeline()
+        .addMiddleware(logRequests())
+        .addMiddleware(CorsService.corsMiddleware)
+        .addHandler(_serverRoutes.router);
 
-  // Configure a pipeline that logs requests.
-  final handler = Pipeline().addMiddleware(logRequests()).addHandler(_router);
-
-  // For running in containers, we respect the PORT environment variable.
-  final port = int.parse(Platform.environment['PORT'] ?? '8080');
-  final server = await serve(handler, ip, port);
-  print('Server listening on port ${server.port}');
+    await serve(handler, _ip, _port).then(
+      (server) {
+        print('Server listening on port ${server.port}');
+        return server;
+      },
+      onError: (err, stack) {
+        print('Unable to start server --->>> $err');
+      },
+    );
+  }
 }

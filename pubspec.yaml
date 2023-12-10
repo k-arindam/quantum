@@ -1,7 +1,7 @@
 name: quantum
 description: A server app using the shelf package and Docker.
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+repository: https://github.com/k-arindam/quantum.git
 
 environment:
   sdk: ^3.2.3
@@ -10,6 +10,10 @@ dependencies:
   args: ^2.4.0
   shelf: ^1.4.0
   shelf_router: ^1.1.0
+  shelf_static: ^1.1.2
+  uuid: ^4.2.1
+  crypto: ^3.0.3
+  meta: ^1.11.0
 
 dev_dependencies:
   http: ^1.1.0
