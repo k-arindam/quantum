@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart';
 
+import 'src/controllers/database_controller.dart';
 import 'src/routes/server_routes.dart';
 import 'src/services/cors_service.dart';
 
@@ -18,6 +19,8 @@ abstract class Quantum {
         .addMiddleware(logRequests())
         .addMiddleware(CorsService.corsMiddleware)
         .addHandler(_serverRoutes.router);
+
+    await DatabaseController.shared.connect();
 
     await serve(handler, _ip, _port).then(
       (server) {

@@ -1,0 +1,1 @@
+enum RespType { success, error }
