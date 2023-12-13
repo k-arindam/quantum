@@ -11,7 +11,7 @@ class QuantumUser {
     required this.password,
   });
 
-  factory QuantumUser.fromJson(Map<String, dynamic> json) {
+  factory QuantumUser.fromJson(Map json) {
     return QuantumUser(
       id: json['id'],
       name: json['name'],
