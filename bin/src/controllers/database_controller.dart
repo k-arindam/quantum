@@ -11,7 +11,8 @@ class DatabaseController {
       print("--->>> Database connected :: ${_db.databaseName}@${_db.state}!"));
 
   Future<bool> addUser(QuantumUser user) async =>
-      (await _userCollection.insertOne(user.toJson())).isSuccess;
+      (await _userCollection.insertOne(user.toJson(includePassword: true)))
+          .isSuccess;
 
   Future<QuantumUser> getUser(String email) async {
     final user = await _userCollection.findOne(where.eq('email', email));
@@ -22,6 +23,9 @@ class DatabaseController {
 
     throw Exception("User not found !!!");
   }
+
+  Future<bool> isRegistered(String email) async =>
+      (await _userCollection.findOne(where.eq('email', email))) != null;
 
   // Init
   static final DatabaseController _shared = DatabaseController._();

@@ -13,7 +13,7 @@ class QuantumUser {
 
   factory QuantumUser.fromJson(Map json) {
     return QuantumUser(
-      id: json['id'],
+      id: json['_id'],
       name: json['name'],
       email: json['email'],
       password: json['password'],
@@ -22,7 +22,7 @@ class QuantumUser {
 
   Map<String, dynamic> toJson({bool includePassword = false}) {
     final json = {
-      'id': id,
+      '_id': id,
       'name': name,
       'email': email,
       'password': password,

@@ -28,7 +28,8 @@ class ServerRoutes {
     return _router
       ..get(Constants.rootPath, _rootHandler)
       ..get('${Constants.echoPath}/<message>', _echoHandler)
-      ..post(Constants.loginPath, _authController.loginHandler);
+      ..post(Constants.loginPath, _authController.loginHandler)
+      ..post(Constants.signupPath, _authController.signupHandler);
   }
 
   // GETTERS

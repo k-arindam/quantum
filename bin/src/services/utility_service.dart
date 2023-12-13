@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer' as dev;
 
 import 'package:crypto/crypto.dart';
 
@@ -42,7 +41,7 @@ abstract class Utils {
     final digest = hmacSha256.convert(bytes);
 
     final encryptedPassword = digest.toString();
-    dev.log("Encrypted password: $encryptedPassword");
+    print("Encrypted password: $encryptedPassword");
 
     return encryptedPassword;
   }
