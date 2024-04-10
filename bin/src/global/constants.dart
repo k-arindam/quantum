@@ -12,4 +12,5 @@ abstract class Constants {
   static const String loginPath = '$apiPath/login';
   static const String signupPath = '$apiPath/signup';
   static const String addAdminPath = '$apiPath/add-admin';
+  static const String uploadPath = '$apiPath/upload';
 }
