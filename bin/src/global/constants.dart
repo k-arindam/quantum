@@ -3,8 +3,11 @@ abstract class Constants {
 
   // API Routes
   static const String rootPath = '/';
-  static const String publicPath = '/public';
+  static const String predictionAPI = "localhost:8081/predict";
+
   static const String adminPath = '/admin';
+  static const String publicPath = '/public';
+  static const String uploadsPath = '/uploads';
 
   static const String apiPath = '/api/v1';
 

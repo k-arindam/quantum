@@ -6,7 +6,9 @@ import 'package:shelf_router/shelf_router.dart';
 import 'package:shelf_static/shelf_static.dart';
 
 import '../controllers/auth_controller.dart';
+import '../controllers/llm_controller.dart';
 import '../global/constants.dart';
+import '../interfaces/quantum_llm.dart';
 
 class ServerRoutes {
   static final ServerRoutes _shared = ServerRoutes._instance();
@@ -16,6 +18,8 @@ class ServerRoutes {
 
   final _router = Router();
   final _authController = AuthController();
+
+  final QuantumLLM llm = LLMController();
 
   final _uploadsHandler = createStaticHandler(
     "uploads",
@@ -69,8 +73,8 @@ class ServerRoutes {
     print("--->>> Router requested!");
 
     return _router
-      ..mount("/public", _publicHandler)
-      ..mount("/uploads", _uploadsHandler)
+      ..mount(Constants.publicPath, _publicHandler)
+      ..mount(Constants.uploadsPath, _uploadsHandler)
       ..get(Constants.rootPath, _rootHandler)
       ..get('${Constants.echoPath}/<message>', _echoHandler)
       ..post(Constants.loginPath, _authController.loginHandler)

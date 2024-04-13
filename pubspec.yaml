@@ -16,6 +16,7 @@ dependencies:
   meta: ^1.11.0
   mongo_dart: ^0.9.3
   shelf_multipart: ^1.0.0
+  http: ^1.2.1
 
 dev_dependencies:
   http: ^1.1.0

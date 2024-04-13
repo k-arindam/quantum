@@ -1,4 +1,5 @@
 # https://dart.dev/guides/libraries/private-files
 # Created by `dart pub`
 .dart_tool/
+python/models/mistral-7b-instruct-v0.1.Q5_K_M
 python/models/Mistral-7B-Instruct-v0.2
